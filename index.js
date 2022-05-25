@@ -5,6 +5,8 @@ const cors = require('cors');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const stripe = require("stripe")(process.env.SECRET_KEY)
+
+
 //middleware
 app.use(cors())
 app.use(express.json());
@@ -23,6 +25,7 @@ async function run() {
   const paymentCollection = client.db('lukas').collection('payments');
   try {
 
+
     //verify jwt token
     function verifyJWT(req, res, next) {
       const authHeader = req.headers.authorization;
@@ -39,6 +42,8 @@ async function run() {
         next();
       })
     }
+
+
     //verfiy admin 
     const verifyAdmin = async (req, res, next) => {
       const requester = req.decoded.email;
@@ -50,6 +55,8 @@ async function run() {
         res.status(403).send({ message: 'forbidden access' })
       }
     }
+
+    
     //API CREATED ALL PRODUCT
 
     app.get('/product', async (req, res) => {
@@ -126,18 +133,24 @@ async function run() {
       const result = await orderCollection.insertOne(newOrder);
       res.send(result)
     })
+
+
     //add post review
     app.post('/review', async (req, res) => {
       const newReview = req.body;
       const result = await reviewCollection.insertOne(newReview);
       res.send(result)
     })
+
+    
     //add product
     app.post('/product', async (req, res) => {
       const newProduct = req.body;
       const result = await productCollection.insertOne(newProduct);
       res.send(result)
     })
+
+
     //delete product
     app.delete('/product/:id', async (req, res) => {
       const id = req.params.id;
@@ -228,7 +241,7 @@ async function run() {
 
     })
 
-    
+
     // //PAYMENT SUCESSS API CREATED
     app.post("/create-payment-intent", async (req, res) => {
       const service = req.body;
