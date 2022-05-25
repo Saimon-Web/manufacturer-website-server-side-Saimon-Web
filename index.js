@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = process.env.PORT ;
+const port = process.env.PORT;
 const cors = require('cors');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
@@ -35,7 +35,7 @@ async function run() {
           return res.status(403).send({ message: 'forbidden access' })
         }
         req.decoded = decoded;
-        console.log('fucnt',decoded)
+        console.log('fucnt', decoded)
         next();
       })
     }
@@ -91,7 +91,7 @@ async function run() {
       const options = { upsert: true };
       const updateDoc = {
         $set: {
-          shipped:true
+          shipped: true
         },
       };
       const result = await orderCollection.updateOne(filter, updateDoc, options);
@@ -111,8 +111,8 @@ async function run() {
       console.log(decodedEmail)
       const clientemail = req.query.clientemail;
       const query = { clientemail: clientemail };
-      console.log('client',clientemail)
-      if (clientemail === decodedEmail) {    
+      console.log('client', clientemail)
+      if (clientemail === decodedEmail) {
         const cursor = orderCollection.find(query);
         const orders = await cursor.toArray();
         res.send(orders);
@@ -120,19 +120,6 @@ async function run() {
 
     })
 
-    //email query for order
-    // app.get('/order', async (req, res) => {
-    //   const clientemail = req.query.clientemail;
-    //   console.log('clientemail',clientemail)
-    //   const query = { clientemail: clientemail }
-    //   const decodedEmail = req.decoded.email;
-    //   console.log(decodedEmail)
-    //   if (clientemail === decodedEmail) {
-    //     const orders = await orderCollection.find(query).toArray();
-    //     res.send(orders)
-    //   }
-
-    // })
     //order info plcement added
     app.post('/order', async (req, res) => {
       const newOrder = req.body;
@@ -264,7 +251,7 @@ async function run() {
 
 
 
-   
+
 
 
   }
