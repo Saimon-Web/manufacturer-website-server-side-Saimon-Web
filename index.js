@@ -162,7 +162,7 @@ async function run() {
 
     //api review get
 
-    
+
     app.get('/review', async (req, res) => {
       const query = {}
       const cursor = reviewCollection.find(query)
@@ -186,11 +186,15 @@ async function run() {
       const accessToken = jwt.sign({ email: email }, process.env.ACCESS_TOKEN, { expiresIn: '1d' })
       res.send({ result, accessToken })
     })
+
+
     //users api created
     app.get('/user', verifyJWT, async (req, res) => {
       const users = await userCollection.find().toArray();
       res.send(users)
     })
+
+
     //admin get database only admin showing all user
     app.get('/admin/:email', verifyJWT, async (req, res) => {
       const email = req.params.email;
@@ -200,6 +204,8 @@ async function run() {
       const isAdmin = (user.role === 'admin');
       res.send({ admin: isAdmin })
     })
+
+
 
     //admin created 
     app.put('/user/admin/:email', verifyJWT, async (req, res) => {
@@ -221,6 +227,8 @@ async function run() {
       }
 
     })
+
+    
     // //PAYMENT SUCESSS API CREATED
     app.post("/create-payment-intent", async (req, res) => {
       const service = req.body;
