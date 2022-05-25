@@ -158,14 +158,22 @@ async function run() {
       const result = await orderCollection.deleteOne(query)
       res.send(result)
     })
+
+
     //api review get
+
+    
     app.get('/review', async (req, res) => {
       const query = {}
       const cursor = reviewCollection.find(query)
       const reviews = await cursor.toArray()
       res.send(reviews)
     })
-    //LOGIN TIME JWT TOKEN CREATE
+
+
+    //LOGIN TIME JWT TOKEN 
+
+
     app.put('/user/:email', async (req, res) => {
       const email = req.params.email;
       const user = req.body;
