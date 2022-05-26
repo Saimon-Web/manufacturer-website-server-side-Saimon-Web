@@ -71,7 +71,7 @@ async function run() {
     })
 
     //each user profile 
-    app.get('/useprofile', verifyJWT, async (req, res) => {
+    app.get('/useprofile', async (req, res) => {
       const decodedEmail = req.decoded.email;
       console.log(decodedEmail)
       const useremail = req.query.useremail;
