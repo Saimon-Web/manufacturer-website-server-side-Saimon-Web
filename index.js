@@ -23,6 +23,7 @@ async function run() {
   const reviewCollection = client.db('lukas').collection('reviews');
   const userCollection = client.db('lukas').collection('users');
   const paymentCollection = client.db('lukas').collection('payments');
+  const userprofileCollection = client.db('lukas').collection('userprofile');
   try {
 
 
@@ -55,6 +56,13 @@ async function run() {
         res.status(403).send({ message: 'forbidden access' })
       }
     }
+
+     //user profile  added info form
+     app.post('/userprofile', async (req, res) => {
+      const newUser = req.body;
+      const result = await userprofileCollection.insertOne(newUser);
+      res.send(result)
+    })
 
     
     //API CREATED ALL PRODUCT
