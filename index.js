@@ -83,6 +83,23 @@ async function run() {
 
     })
 
+         //update data 
+         app.put('/userprofile/:id',async(req,res) => {
+          const id=req.params.id;
+          const updateProduct=req.body;
+          const filter={_id:ObjectId(id)};
+          const options = { upsert: true };
+         const updateDoc={
+            $set:{
+                phone:updateProduct.phone,
+                education:updateProduct.education,
+                linkdinprofile:updateProduct.linkdinprofile
+            }
+         }
+         const result=await userprofileCollection.updateOne(filter,updateDoc,options);
+         res.send(result)
+      })
+
     // //each user profile 
     // app.get('/singleprofile', async (req, res) => {
     //   const decodedEmail = req.decoded.email;
