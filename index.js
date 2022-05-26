@@ -71,7 +71,7 @@ async function run() {
     })
 
     // //each user profile 
-    app.get('/userprofile', async (req, res) => {
+    app.get('/singleprofile', async (req, res) => {
       const decodedEmail = req.decoded.email;
       console.log(decodedEmail)
       const useremail = req.query.useremail;
