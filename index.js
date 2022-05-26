@@ -63,6 +63,27 @@ async function run() {
       const result = await userprofileCollection.insertOne(newUser);
       res.send(result)
     })
+     app.get('/userprofile', async (req, res) => {
+      const query = {}
+      const cursor = userprofileCollection.find(query)
+      const userprofiles = await cursor.toArray()
+      res.send(userprofiles)
+    })
+
+    //each user profile 
+    app.get('/useprofile', verifyJWT, async (req, res) => {
+      const decodedEmail = req.decoded.email;
+      console.log(decodedEmail)
+      const useremail = req.query.useremail;
+      const query = { useremail: useremail };
+      console.log('client', useremail)
+      if (useremail === decodedEmail) {
+        const cursor = orderCollection.find(query);
+        const orders = await cursor.toArray();
+        res.send(orders);
+      }
+
+    })
 
     
     //API CREATED ALL PRODUCT
