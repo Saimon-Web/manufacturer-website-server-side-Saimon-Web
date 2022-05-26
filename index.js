@@ -70,20 +70,20 @@ async function run() {
       res.send(userprofiles)
     })
 
-    //each user profile 
-    app.get('/useprofile', async (req, res) => {
-      const decodedEmail = req.decoded.email;
-      console.log(decodedEmail)
-      const useremail = req.query.useremail;
-      const query = { useremail: useremail };
-      console.log('client', useremail)
-      if (useremail === decodedEmail) {
-        const cursor = userprofileCollection.find(query);
-        const userprfiles = await cursor.toArray();
-        res.send(userprfiles);
-      }
+    // //each user profile 
+    // app.get('/useprofile', async (req, res) => {
+    //   const decodedEmail = req.decoded.email;
+    //   console.log(decodedEmail)
+    //   const useremail = req.query.useremail;
+    //   const query = { useremail: useremail };
+    //   console.log('client', useremail)
+    //   if (useremail === decodedEmail) {
+    //     const cursor = userprofileCollection.find(query);
+    //     const userprfiles = await cursor.toArray();
+    //     res.send(userprfiles);
+    //   }
 
-    })
+    // })
 
     
     //API CREATED ALL PRODUCT
