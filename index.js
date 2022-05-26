@@ -70,6 +70,19 @@ async function run() {
       res.send(userprofiles)
     })
 
+    //single profiles
+    app.get('/singleprofile',verifyJWT, async (req, res) => {
+      const decodedEmail = req.decoded.email;
+         const useremail = req.query.useremail;
+      const query = { useremail: useremail };
+      if (useremail === decodedEmail) {
+        const cursor = userprofileCollection.find(query);
+        const pro = await cursor.toArray();
+        res.send(pro);
+      }
+
+    })
+
     // //each user profile 
     // app.get('/singleprofile', async (req, res) => {
     //   const decodedEmail = req.decoded.email;
